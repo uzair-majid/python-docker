@@ -12,7 +12,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh 'sleep 2'
                 sh 'curl http://localhost:8000/initdb'
+                sh 'sleep 2'
                 sh 'curl http://localhost:8000/widgets'
                 
 

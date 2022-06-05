@@ -12,6 +12,10 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh 'curl http://localhost:8000/initdb'
+                sh 'curl http://localhost:8000/widgets'
+                
+
             }
         }
         stage('Deploy') {

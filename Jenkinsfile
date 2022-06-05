@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'docker version'
+                sh 'docker compose -f  docker-compose.yml up --build --detach'
             }
         }
         stage('Test') {

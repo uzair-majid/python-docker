@@ -7,7 +7,8 @@ pipeline {
                 echo 'Building..'
                 sh 'docker version'
                 sh 'docker compose -f  docker-compose.yml up --build --detach'
-            }
+           
+ }
         }
         stage('Test') {
             steps {
@@ -23,6 +24,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                script{
+                        docker.withRegistry('529963121727.dkr.ecr.us-east-2.amazonaws.com/uzi', 'ecr:us-east-2:aws-credentials') {
+                   
+                    }
 		
             }
         }

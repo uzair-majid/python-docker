@@ -7,8 +7,7 @@ pipeline {
                 echo 'Building..'
                 sh 'docker version'
                 sh 'docker compose -f  docker-compose.yml up --build --detach'
-           
- }
+            }
         }
         stage('Test') {
             steps {
@@ -24,8 +23,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-          
+		
+            }
         }
     }
 }
-

@@ -25,10 +25,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script{
-                        docker.withRegistry('529963121727.dkr.ecr.us-east-2.amazonaws.com/uzi', 'ecr:us-east-2:aws-credentials') {
-                        echo 'Deployed to aws..'
-
-                    }
+                        docker.withRegistry('529963121727.dkr.ecr.us-east-2.amazonaws.com/uzi', 'ecr:us-east-2:aws-credentials') 
 		
             }
         }

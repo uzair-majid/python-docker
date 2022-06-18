@@ -1,6 +1,9 @@
 pipeline {
     agent any
-  
+    environment {
+        AWS_ACCOUNT_ID= "529963121727"
+        AWS_DEFAULT_REGION= ”us-east-2”
+    }
     stages {
         stage('Build') {
             steps {
@@ -24,10 +27,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-		   script {
-        sh “docker tag ${LOCAL_IMAGE_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG”
-        sh “docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}”
-                }
+		  
 
             }
         }

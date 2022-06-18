@@ -1,13 +1,6 @@
 pipeline {
     agent any
-    environment {
-        AWS_ACCOUNT_ID= "529963121727"
-        AWS_DEFAULT_REGION= ”us-east-2”
-        IMAGE_REPO_NAME= "uzi"
-        LOCAL_IMAGE_NAME= "python-docker_web"
-        IMAGE_TAG= ”latest”
-        REPOSITORY_URI = “${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}”
-    }
+  
     stages {
         stage('Build') {
             steps {

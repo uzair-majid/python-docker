@@ -15,7 +15,12 @@ pipeline {
                 echo 'Building..'
                 sh 'docker version'
                 sh 'docker compose -f  docker-compose.yml up --build --detach'
+                try{
                 sh 'aws ecr get-login-password | docker login -- username AWS -- password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
+                }
+                catch(Exception e){
+
+                }
             }
         }
         stage('Test') {

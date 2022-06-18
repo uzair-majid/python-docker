@@ -17,9 +17,8 @@ pipeline {
                 sh 'docker compose -f  docker-compose.yml up --build --detach'
                 script{
                     try{
-                sh 'aws --version'
-                sh 'sleep 1'
-                sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com'
+            
+                sh 'aws ecr get-login-password --region us-east-2'
 
                 }
                 catch(Exception e){

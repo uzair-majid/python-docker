@@ -6,7 +6,7 @@ pipeline {
         IMAGE_REPO_NAME="uzi"
         IMAGE_LOCAL_NAME="python-docker_web"
         IMAGE_TAG=”latest”
-        REPOSITORY_URI = '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}'
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 
     }
     stages {

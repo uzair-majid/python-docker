@@ -1,12 +1,20 @@
 pipeline {
     agent any
-
+    environment {
+        AWS_ACCOUNT_ID= "529963121727"
+        AWS_DEFAULT_REGION=”us-east-2”
+        IMAGE_REPO_NAME="uzi"
+        LOCAL_IMAGE_NAME="python-docker_web"
+        IMAGE_TAG=”latest”
+        REPOSITORY_URI = “${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}”
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
                 sh 'docker version'
                 sh 'docker compose -f  docker-compose.yml up --build --detach'
+                sh “aws ecr get-login-password -- region ${AWS_DEFAULT_REGION} | docker login -- username AWS -- password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com”
             }
         }
         stage('Test') {
@@ -23,10 +31,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-		    script{
-                        docker.withRegistry('529963121727.dkr.ecr.us-east-2.amazonaws.com/uzi', 'ecr:us-east-2:aws-creds')
-                {}
-                } 
+		   script {
+        sh “docker tag ${LOCAL_IMAGE_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG”
+        sh “docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}”
+}
 
             }
         }

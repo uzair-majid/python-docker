@@ -4,6 +4,7 @@ services:
  web:
   build:
    context: .
+  image: python-docker_web:latest
   ports:
   - 8000:5000
   volumes:
